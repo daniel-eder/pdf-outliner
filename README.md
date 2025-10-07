@@ -88,23 +88,13 @@ The tool uses [LiteLLM](https://github.com/BerriAI/litellm) for AI model integra
 
 ### Method 1: Environment File (.env)
 
-Create a `.env` file in your project directory:
+Copy the provided `.env.example` file to `.env` and configure your API keys:
 
-```env
-# OpenAI
-OPENAI_API_KEY=sk-...
-
-# Anthropic
-ANTHROPIC_API_KEY=sk-ant-...
-
-# Azure OpenAI
-AZURE_API_KEY=...
-AZURE_API_BASE=https://...
-AZURE_API_VERSION=2024-02-15-preview
-
-# Default model (optional)
-DEFAULT_MODEL=gpt-4o-mini
+```bash
+cp .env.example .env
 ```
+
+Then edit `.env` with your API keys and settings.
 
 ### Method 2: Environment Variables
 
@@ -136,6 +126,7 @@ Any model supported by LiteLLM works, including:
 
 - **OpenAI**: `gpt-4o`, `gpt-4o-mini`, `gpt-4-turbo`, `gpt-3.5-turbo`
 - **Anthropic**: `claude-3-5-sonnet-20241022`, `claude-3-opus-20240229`
+- **Google Gemini**: `gemini/gemini-2.5-pro`, `gemini/gemini-2.5-flash`
 - **Azure OpenAI**: `azure/<deployment-name>`
 - **Local models**: `ollama/llama3`, `ollama/mistral`
 - And many more...
