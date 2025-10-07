@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2025 Daniel Eder
+#
+# SPDX-License-Identifier: MIT
+
+[project]
+name = "pdf-outliner"
+version = "1.0.0"
+description = "AI-powered PDF outliner that adds bookmarks based on detected headings"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
