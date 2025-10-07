@@ -43,7 +43,7 @@ def cli() -> None:
 
     # Validate input file
     if not args.input_pdf.exists():
-        print(f"❌ Error: Input file not found: {args.input_pdf}", file=sys.stderr)
+        print(f"[ERROR] Input file not found: {args.input_pdf}", file=sys.stderr)
         sys.exit(1)
 
     # Create outliner and process
@@ -53,12 +53,12 @@ def cli() -> None:
 
         # Optionally print the outline
         if args.show_outline:
-            print("\n📋 Detected Outline:")
+            print("\n[*] Detected Outline:")
             print("=" * 60)
             for heading in outline.headings:
                 indent = "  " * (heading.level - 1)
-                print(f"{indent}{'▸' * heading.level} {heading.title} (p.{heading.page})")
+                print(f"{indent}{'>' * heading.level} {heading.title} (p.{heading.page})")
 
     except Exception as e:
-        print(f"❌ Error: {e}", file=sys.stderr)
+        print(f"[ERROR] {e}", file=sys.stderr)
         sys.exit(1)

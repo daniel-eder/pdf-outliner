@@ -216,16 +216,16 @@ Return a JSON object with a "headings" array where each heading has:
         if output_path is None:
             output_path = input_path.parent / f"{input_path.stem}_outlined.pdf"
 
-        print(f"📄 Reading PDF: {input_path}")
+        print(f"[*] Reading PDF: {input_path}")
         pages = self.extract_text_with_pages(input_path)
-        print(f"   Found {len(pages)} pages")
+        print(f"    Found {len(pages)} pages")
 
-        print(f"\n🤖 Analyzing with {self.model}...")
+        print(f"\n[*] Analyzing with {self.model}...")
         outline = self.analyze_pdf_with_llm(pages)
-        print(f"   Detected {len(outline.headings)} headings")
+        print(f"    Detected {len(outline.headings)} headings")
 
-        print(f"\n📑 Adding bookmarks to PDF...")
+        print(f"\n[*] Adding bookmarks to PDF...")
         self.add_bookmarks_to_pdf(input_path, output_path, outline)
-        print(f"   ✅ Saved to: {output_path}")
+        print(f"    [OK] Saved to: {output_path}")
 
         return outline
