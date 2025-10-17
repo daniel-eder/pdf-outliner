@@ -173,6 +173,6 @@ uv run python -m pdf_outliner.cli input.pdf
 
 ## ⚠️ Limitations
 
-- Large documents may be truncated (50,000 character limit) to fit within model context windows
+- Large documents may be truncated (2,000,000 character limit) to fit within model context windows
 - Accuracy depends on the chosen LLM model and document structure clarity
 - Complex layouts or scanned documents may produce less accurate results

@@ -82,7 +82,8 @@ class PDFOutliner:
             document_text += page_data["text"]
 
         # Truncate if too long (keep within context limits)
-        max_chars = 50000
+        # 2 million characters, with a context window of 1 million tokens that should be safe.
+        max_chars = 2000000  
         if len(document_text) > max_chars:
             document_text = document_text[:max_chars] + "\n\n[Document truncated...]"
 
