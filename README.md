@@ -79,7 +79,7 @@ pdf-outliner document.pdf -o bookmarked.pdf -m claude-3-5-sonnet-20241022 --show
 
 - `input_pdf`: Path to the input PDF file (required)
 - `-o, --output`: Output PDF file path (default: `input_outlined.pdf`)
-- `-m, --model`: LiteLLM model to use (default: `gpt-4o-mini`)
+- `-m, --model`: LiteLLM model to use (default: `gemini/gemini-3.1-flash-lite`)
 - `--show-outline`: Print the detected outline to console
 
 ## ⚙️ Configuration
@@ -103,13 +103,13 @@ Set environment variables in your shell:
 ```powershell
 # PowerShell
 $env:OPENAI_API_KEY="sk-..."
-$env:DEFAULT_MODEL="gpt-4o-mini"
+$env:DEFAULT_MODEL="gemini/gemini-3.1-flash-lite"
 ```
 
 ```bash
 # Bash/Zsh (Linux/Mac)
 export OPENAI_API_KEY="sk-..."
-export DEFAULT_MODEL="gpt-4o-mini"
+export DEFAULT_MODEL="gemini/gemini-3.1-flash-lite"
 ```
 
 ### Method 3: CLI Argument
@@ -124,7 +124,7 @@ pdf-outliner input.pdf -m gpt-4o
 
 Any model supported by LiteLLM works, including:
 
-- **OpenAI**: `gpt-4o`, `gpt-4o-mini`, `gpt-4-turbo`, `gpt-3.5-turbo`
+- **OpenAI**: `gpt-4o`, `gemini/gemini-3.1-flash-lite`, `gpt-4-turbo`, `gpt-3.5-turbo`
 - **Anthropic**: `claude-3-5-sonnet-20241022`, `claude-3-opus-20240229`
 - **Google Gemini**: `gemini/gemini-2.5-pro`, `gemini/gemini-2.5-flash`
 - **Azure OpenAI**: `azure/<deployment-name>`

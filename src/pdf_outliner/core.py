@@ -36,7 +36,7 @@ class DocumentOutline(BaseModel):
 class PDFOutliner:
     """Analyzes PDFs and adds bookmarks based on detected headings."""
 
-    def __init__(self, model: str = "gpt-4o-mini"):
+    def __init__(self, model: str = "gemini/gemini-3.1-flash-lite"):
         """
         Initialize the PDF outliner.
 
@@ -65,7 +65,7 @@ class PDFOutliner:
 
         return pages
 
-    def analyze_pdf_with_llm(self, pages: list[dict[str, Any]]) -> DocumentOutline:
+    def analyze_pdf_with_llm(self, pages: list[dict[str, Any]], guidance: str | None = None) -> DocumentOutline:
         """
         Analyze PDF text using LLM to detect headings.
 
@@ -104,10 +104,15 @@ Guidelines:
 
 Return the outline as a structured list."""
 
+        guidance_section = f"{guidance}\n" if guidance else ""
+
         user_prompt = f"""Analyze this document and extract all headings with their levels and page numbers:
 
+<document>
 {document_text}
+</document>
 
+{guidance_section}
 Return a JSON object with a "headings" array where each heading has:
 - title: the heading text
 - level: hierarchical level (1-6)
@@ -203,6 +208,7 @@ Return a JSON object with a "headings" array where each heading has:
         self,
         input_path: Path,
         output_path: Path | None = None,
+        guidance: str | None = None,
     ) -> DocumentOutline:
         """
         Complete workflow: extract text, analyze, and add bookmarks.
@@ -222,7 +228,7 @@ Return a JSON object with a "headings" array where each heading has:
         print(f"    Found {len(pages)} pages")
 
         print(f"\n[*] Analyzing with {self.model}...")
-        outline = self.analyze_pdf_with_llm(pages)
+        outline = self.analyze_pdf_with_llm(pages, guidance=guidance)
         print(f"    Detected {len(outline.headings)} headings")
 
         print(f"\n[*] Adding bookmarks to PDF...")

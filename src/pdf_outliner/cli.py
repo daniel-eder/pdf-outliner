@@ -30,8 +30,14 @@ def cli() -> None:
         "-m",
         "--model",
         type=str,
-        default=os.getenv("DEFAULT_MODEL", "gpt-4o-mini"),
-        help="LiteLLM model to use (default: gpt-4o-mini)",
+        default=os.getenv("DEFAULT_MODEL", "gemini/gemini-3.1-flash-lite"),
+        help="LiteLLM model to use (default: gemini/gemini-3.1-flash-lite)",
+    )
+    parser.add_argument(
+        "-g",
+        "--guidance",
+        type=str,
+        help="Additional guidance for the AI about what kind of outline to produce",
     )
     parser.add_argument(
         "--show-outline",
@@ -49,7 +55,7 @@ def cli() -> None:
     # Create outliner and process
     try:
         outliner = PDFOutliner(model=args.model)
-        outline = outliner.process_pdf(args.input_pdf, args.output)
+        outline = outliner.process_pdf(args.input_pdf, args.output, guidance=args.guidance)
 
         # Optionally print the outline
         if args.show_outline:
