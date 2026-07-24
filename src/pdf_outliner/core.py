@@ -102,7 +102,7 @@ Guidelines:
 - Focus on actual content structure
 - Be conservative - only include clear headings
 
-Return the outline as a structured list."""
+Return exactly one JSON object with a "headings" array. Do not return a bare JSON array."""
 
         guidance_section = f"{guidance}\n" if guidance else ""
 
@@ -133,9 +133,12 @@ Return a JSON object with a "headings" array where each heading has:
             content = response.choices[0].message.content
             data = json.loads(content)
 
-            # Validate with Pydantic
-            outline = DocumentOutline(**data)
-            return outline
+            # Some providers return the headings array directly despite JSON mode.
+            # Normalize that equivalent response before validating its contents.
+            if isinstance(data, list):
+                data = {"headings": data}
+
+            return DocumentOutline.model_validate(data)
 
         except Exception as e:
             raise RuntimeError(f"Error analyzing PDF with LLM: {e}") from e
